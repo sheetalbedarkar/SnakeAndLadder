@@ -15,24 +15,32 @@ function die()
 
 function	playerMove()
 {
-   dieNo=$(die )
-   case $((RANDOM %3)) in
-      $snake)
-               playerPosition=$(($playerPosition-$dieNo))
-               ;;
-      $ladder)
-               playerPosition=$(($playerPosition+$dieNo))
-               ;;
-      $noPlay)               
-               ;;
-   esac
+	dieValue=$(die)
+
+		case $((RANDOM %3)) in
+			$snake)
+				playerPosition=$(($playerPosition-$dieValue))
+					;;
+			$ladder)
+				playerPosition=$(($playerPosition+$dieValue))
+					;;
+			$noPlay)
+					;;
+		esac
+
+		if (( $playerPosition < 0 ))
+		then
+			playerPosition=0;
+		fi
+	
+		if (( $playerPosition>100 ))
+		then
+			playerPosition=$(($playerPosition-$dieValue))
+		fi
 }
 
-while (( $playerPosition <= $WINNING_POSITION ))
+while (( $playerPosition != $WINNING_POSITION ))
 do
-		if (($playerPosition < 0 ))
-		then
-			playerPosition=0
-		fi
 		playerMove
+		echo $playerPosition
 done

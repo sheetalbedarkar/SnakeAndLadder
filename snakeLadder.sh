@@ -1,4 +1,4 @@
-#!/bin/bash  
+#!/bin/bash -x  
 echo "================== Welcome to Snake Ladder Game ==================="
 
 WINNING_POSITION=100;
@@ -11,11 +11,12 @@ count=0
 
 
 declare -A playerRecord
-function die()
+function	die()
 {
    echo $(($((RANDOM %6))+1))
 }
-function condiationCheck
+
+function	condiationCheck
 {
 	position=$1
 
@@ -30,6 +31,7 @@ function condiationCheck
 	echo $position
 
 }
+
 function	playerMove()
 {
 	dieNo=$(die )
@@ -40,19 +42,22 @@ function	playerMove()
 				playerPosition=$(($playerPosition-$dieNo))
 					;;
 			$ladder)
-				playerPosition=$(($playerPosition+$dieNo))
+					playerPosition=$(($playerPosition+$dieNo))
 					;;
 			$noPlay)
 					;;
 		esac
 
-		if (( $flag==0 ))
-		then
+		
 			firstPlayer=$(($firstPlayer +$playerPosition))
 			firstPlayer=$(condiationCheck $firstPlayer $dieNo)
 			playerRecord[DieNo:"$dieNo"]="player 1:$firstPlayer"
+
 }
-while (( $playerPosition != $WINNING_POSITION ))
+
+while (( $firstPlayer != $WINNING_POSITION ))
 do
 		playerMove 
 done
+
+

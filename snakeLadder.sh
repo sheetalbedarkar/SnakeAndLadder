@@ -20,11 +20,11 @@ function condiationCheck
 
 	if (( $position < 0 ))
 	then
-			position=0;
+		position=0;
 	fi
 	if (( $position>100 ))
 	then
-        position=$(($position-$2))
+		position=$(($position-$2))
 	fi
 	echo $position
 
